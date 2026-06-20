@@ -1,0 +1,24 @@
+{
+  "name": "mep-shaft-stacking",
+  "version": "1.0.0",
+  "description": "Analyze MEP construction drawings to identify vertical shafts, map routed services per floor, generate stacking diagrams, and export an Excel-ready coordination tracker.",
+  "author": "datadrivenconstruction",
+  "license": "MIT",
+  "permissions": [
+    "filesystem"
+  ],
+  "entry": "instructions.md",
+  "tags": [
+    "construction",
+    "MEP",
+    "BIM",
+    "coordination",
+    "shafts",
+    "stacking"
+  ],
+  "models": [
+    "claude-*",
+    "gpt-*"
+  ],
+  "minOpenClawVersion": "0.8.0"
+}
