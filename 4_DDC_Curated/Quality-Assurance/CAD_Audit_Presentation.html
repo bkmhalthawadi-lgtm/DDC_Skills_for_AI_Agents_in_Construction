@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CAD Audit Report – P159 HL Coordination</title>
+<meta name="hz:slide-selector" content=".slide">
+<meta name="hz:canvas-width" content="1920">
+<meta name="hz:canvas-height" content="1080">
+<link rel="stylesheet" href="https://use.typekit.net/vbb4mwo.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: #0a0f1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 12px;
+  font-family: "source-sans-3", sans-serif;
+}
+
+/* ── slide shell ── */
+.slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #0f1b2d;
+  flex-shrink: 0;
+}
+
+/* ── shared palette ── */
+:root {
+  --navy:   #0f1b2d;
+  --navy2:  #162236;
+  --navy3:  #1d2f49;
+  --blue:   #1a73e8;
+  --blue2:  #0d5dbf;
+  --cyan:   #38bdf8;
+  --white:  #f0f6ff;
+  --muted:  #8ba3c0;
+  --critical: #ef4444;
+  --flagged:  #f59e0b;
+  --pass:     #22c55e;
+  --border:   rgba(255,255,255,0.08);
+}
+
+/* ── utility ── */
+.heading { font-family:"montserrat",sans-serif; font-weight:700; }
+.sub     { font-family:"montserrat",sans-serif; font-weight:700; }
+.body    { font-family:"source-sans-3",sans-serif; font-weight:400; }
+
+/* ══════════════════════════════════════════
+   SLIDE 1 – TITLE
+══════════════════════════════════════════ */
+.s1-bg {
+  position:absolute; inset:0;
+  background: linear-gradient(135deg, #0a1525 0%, #112240 60%, #0d3a6a 100%);
+}
+.s1-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(26,115,232,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,115,232,0.07) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.s1-accent {
+  position:absolute; left:0; top:0; bottom:0; width:8px;
+  background: linear-gradient(180deg, #38bdf8, #1a73e8, #0d5dbf);
+}
+.s1-circle {
+  position:absolute; right:-160px; top:50%; transform:translateY(-50%);
+  width:700px; height:700px; border-radius:50%;
+  background: radial-gradient(circle, rgba(26,115,232,0.18) 0%, transparent 70%);
+}
+.s1-circle2 {
+  position:absolute; right:80px; top:50%; transform:translateY(-50%);
+  width:420px; height:420px; border-radius:50%;
+  border: 1px solid rgba(56,189,248,0.18);
+}
+.s1-logo-row {
+  position:absolute; top:56px; left:80px;
+  display:flex; align-items:center; gap:18px;
+}
+.s1-logo-icon {
+  width:48px; height:48px; border-radius:10px;
+  background: linear-gradient(135deg,#1a73e8,#38bdf8);
+  display:flex; align-items:center; justify-content:center;
+}
+.s1-logo-text {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:20px; color:#8ba3c0; letter-spacing:3px; text-transform:uppercase;
+}
+.s1-tag {
+  position:absolute; top:64px; right:80px;
+  background:rgba(26,115,232,0.15); border:1px solid rgba(26,115,232,0.3);
+  border-radius:6px; padding:8px 20px;
+  font-family:"source-sans-3",sans-serif; font-size:16px;
+  color:#38bdf8; letter-spacing:2px; text-transform:uppercase;
+}
+.s1-content {
+  position:absolute; left:80px; top:50%; transform:translateY(-50%);
+  max-width:1100px;
+}
+.s1-eyebrow {
+  font-family:"source-sans-3",sans-serif; font-size:22px;
+  color:#38bdf8; letter-spacing:4px; text-transform:uppercase;
+  margin-bottom:28px;
+}
+.s1-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:96px; line-height:1.0; color:#f0f6ff;
+  margin-bottom:24px;
+}
+.s1-title span { color:#1a73e8; }
+.s1-subtitle {
+  font-family:"source-sans-3",sans-serif; font-size:32px;
+  color:#8ba3c0; margin-bottom:60px; line-height:1.4;
+}
+.s1-meta {
+  display:flex; gap:48px;
+}
+.s1-meta-item {}
+.s1-meta-label {
+  font-size:14px; color:#38bdf8; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:6px;
+}
+.s1-meta-value {
+  font-family:"montserrat",sans-serif; font-size:22px; font-weight:700; color:#f0f6ff;
+}
+.s1-bottom {
+  position:absolute; bottom:0; left:0; right:0; height:6px;
+  background: linear-gradient(90deg,#1a73e8,#38bdf8,#1a73e8);
+}
+
+/* ══════════════════════════════════════════
+   SLIDE 2 – DOCUMENT OVERVIEW
+══════════════════════════════════════════ */
+.s2-bg { position:absolute; inset:0; background:#f7f9fc; }
+.s2-header {
+  position:absolute; top:0; left:0; right:0; height:160px;
+  background: linear-gradient(135deg,#0f1b2d,#1d2f49);
+  display:flex; align-items:flex-end; padding:0 80px 28px;
+}
+.s2-header-num {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:100px; color:rgba(255,255,255,0.06);
+  position:absolute; right:80px; bottom:-10px; line-height:1;
+}
+.s2-header-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:44px; color:#f0f6ff;
+}
+.s2-header-accent {
+  display:inline-block; width:6px; height:44px;
+  background:#1a73e8; border-radius:3px; margin-right:20px; vertical-align:middle;
+}
+.s2-body { position:absolute; top:160px; left:0; right:0; bottom:0; padding:48px 80px; }
+.s2-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:28px; height:100%;
+}
+.s2-card {
+  background:#fff; border-radius:16px;
+  border:1px solid #e2e8f0;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  padding:36px; display:flex; flex-direction:column; gap:16px;
+}
+.s2-card-label {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:13px; color:#1a73e8; letter-spacing:3px; text-transform:uppercase;
+}
+.s2-card-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:24px; color:#0f1b2d;
+}
+.s2-row { display:flex; gap:16px; align-items:flex-start; }
+.s2-row-icon {
+  width:40px; height:40px; border-radius:8px; flex-shrink:0;
+  background:rgba(26,115,232,0.1); display:flex; align-items:center; justify-content:center;
+}
+.s2-row-text {}
+.s2-row-key { font-size:13px; color:#8ba3c0; font-weight:600; text-transform:uppercase; letter-spacing:1px; }
+.s2-row-val { font-size:18px; color:#1e293b; line-height:1.4; margin-top:2px; }
+.s2-badge {
+  display:inline-block; padding:4px 14px; border-radius:20px; font-size:14px; font-weight:700;
+  background:#dbeafe; color:#1a73e8;
+}
+.s2-desc-card {
+  background: linear-gradient(135deg,#0f1b2d,#1d2f49);
+  border-radius:16px; padding:36px; display:flex; flex-direction:column; gap:20px;
+}
+.s2-desc-text {
+  font-size:22px; color:#c4d4e8; line-height:1.7;
+}
+
+/* ══════════════════════════════════════════
+   SLIDE 3 – COMPONENT KEY (fire/floors)
+══════════════════════════════════════════ */
+.s3-bg { position:absolute; inset:0; background:#f7f9fc; }
+.dark-header {
+  position:absolute; top:0; left:0; right:0; height:160px;
+  background: linear-gradient(135deg,#0f1b2d,#1d2f49);
+  display:flex; align-items:flex-end; padding:0 80px 28px;
+}
+.dark-header-num {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:100px; color:rgba(255,255,255,0.06);
+  position:absolute; right:80px; bottom:-10px; line-height:1;
+}
+.dark-header-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:44px; color:#f0f6ff;
+}
+.dark-header-sub {
+  font-family:"source-sans-3",sans-serif; font-size:20px;
+  color:#8ba3c0; margin-left:26px;
+}
+.accent-bar {
+  display:inline-block; width:6px; height:44px;
+  background:#1a73e8; border-radius:3px; margin-right:20px; vertical-align:middle;
+}
+.s3-body { position:absolute; top:160px; left:0; right:0; bottom:0; padding:36px 80px; }
+.s3-cols { display:grid; grid-template-columns:1fr 1fr; gap:28px; height:100%; }
+.comp-block {
+  background:#fff; border-radius:14px; border:1px solid #e2e8f0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05); padding:28px; overflow:hidden;
+}
+.comp-block-header {
+  display:flex; align-items:center; gap:14px; margin-bottom:20px;
+  padding-bottom:16px; border-bottom:2px solid #f1f5f9;
+}
+.comp-block-icon {
+  width:44px; height:44px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+}
+.comp-block-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:20px; color:#0f1b2d;
+}
+.comp-table { width:100%; border-collapse:collapse; }
+.comp-table tr { border-bottom:1px solid #f1f5f9; }
+.comp-table tr:last-child { border-bottom:none; }
+.comp-table td { padding:9px 0; vertical-align:top; }
+.comp-table td:first-child {
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:14px;
+  color:#1a73e8; width:44%; padding-right:12px; line-height:1.4;
+}
+.comp-table td:last-child {
+  font-size:15px; color:#475569; line-height:1.4;
+}
+
+/* ══════════════════════════════════════════
+   SLIDE 4 – COMPONENT KEY (MEP systems)
+══════════════════════════════════════════ */
+/* reuses .dark-header, .comp-block etc */
+
+/* ══════════════════════════════════════════
+   SLIDE 5 – FINDINGS SUMMARY
+══════════════════════════════════════════ */
+.s5-bg { position:absolute; inset:0; background:#0f1b2d; }
+.s5-grid-bg {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(26,115,232,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,115,232,0.04) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+.s5-header {
+  position:absolute; top:0; left:0; right:0; height:140px;
+  display:flex; align-items:center; padding:0 80px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.s5-header-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:44px; color:#f0f6ff;
+}
+.s5-counters {
+  margin-left:auto; display:flex; gap:32px;
+}
+.s5-counter {
+  text-align:center; background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px; padding:16px 32px;
+}
+.s5-counter-num {
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:40px;
+}
+.s5-counter-label { font-size:14px; color:#8ba3c0; margin-top:4px; text-transform:uppercase; letter-spacing:1px; }
+.s5-body { position:absolute; top:140px; left:0; right:0; bottom:0; padding:36px 80px; }
+.s5-table { width:100%; border-collapse:separate; border-spacing:0 8px; }
+.s5-table thead tr th {
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:13px;
+  color:#8ba3c0; letter-spacing:2px; text-transform:uppercase;
+  padding:0 20px 8px; border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.s5-table thead tr th:first-child { width:60px; }
+.s5-table tbody tr td {
+  padding:16px 20px; background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  font-size:17px; color:#c4d4e8; vertical-align:middle;
+}
+.s5-table tbody tr td:first-child {
+  border-radius:10px 0 0 10px; font-family:"montserrat",sans-serif;
+  font-weight:700; color:#8ba3c0; font-size:15px;
+}
+.s5-table tbody tr td:last-child { border-radius:0 10px 10px 0; }
+.s5-table tbody tr td:nth-child(2) {
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:16px; color:#f0f6ff;
+}
+.badge-critical {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.3);
+  color:#ef4444; border-radius:20px; padding:4px 14px; font-size:14px; font-weight:700;
+}
+.badge-flagged {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3);
+  color:#f59e0b; border-radius:20px; padding:4px 14px; font-size:14px; font-weight:700;
+}
+.badge-pass {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3);
+  color:#22c55e; border-radius:20px; padding:4px 14px; font-size:14px; font-weight:700;
+}
+.priority-high   { color:#ef4444; font-weight:700; font-size:15px; }
+.priority-medium { color:#f59e0b; font-weight:700; font-size:15px; }
+.priority-low    { color:#22c55e; font-weight:700; font-size:15px; }
+
+/* ══════════════════════════════════════════
+   FINDING SLIDES (6-10)
+══════════════════════════════════════════ */
+.finding-slide-bg { position:absolute; inset:0; background:#f7f9fc; }
+.finding-header {
+  position:absolute; top:0; left:0; right:0; height:160px;
+  display:flex; align-items:flex-end; padding:0 80px 28px;
+}
+.finding-header-critical { background:linear-gradient(135deg,#7f1d1d,#991b1b); }
+.finding-header-flagged  { background:linear-gradient(135deg,#78350f,#92400e); }
+.finding-header-pass     { background:linear-gradient(135deg,#14532d,#166534); }
+.finding-tag {
+  padding:6px 18px; border-radius:20px; font-family:"montserrat",sans-serif;
+  font-weight:700; font-size:16px; margin-right:24px; flex-shrink:0; align-self:center; margin-bottom:4px;
+}
+.finding-tag-critical { background:rgba(239,68,68,0.25); color:#fca5a5; border:1px solid rgba(239,68,68,0.4); }
+.finding-tag-flagged  { background:rgba(245,158,11,0.25); color:#fcd34d; border:1px solid rgba(245,158,11,0.4); }
+.finding-tag-pass     { background:rgba(34,197,94,0.25);  color:#86efac; border:1px solid rgba(34,197,94,0.4); }
+.finding-header-content { flex:1; }
+.finding-header-label {
+  font-family:"source-sans-3",sans-serif; font-size:16px;
+  color:rgba(255,255,255,0.55); letter-spacing:3px; text-transform:uppercase; margin-bottom:6px;
+}
+.finding-header-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:38px; color:#fff; line-height:1.1;
+}
+.finding-num {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:110px; color:rgba(255,255,255,0.07); line-height:1;
+  position:absolute; right:80px; bottom:-16px;
+}
+.finding-body { position:absolute; top:160px; left:0; right:0; bottom:0; padding:40px 80px; }
+.finding-cols { display:grid; grid-template-columns:1fr 1fr; gap:28px; height:100%; }
+.finding-card {
+  background:#fff; border-radius:14px; border:1px solid #e2e8f0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05); padding:32px; display:flex; flex-direction:column;
+}
+.finding-card-label {
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:13px;
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:14px;
+}
+.finding-card-label-red    { color:#ef4444; }
+.finding-card-label-amber  { color:#f59e0b; }
+.finding-card-label-blue   { color:#1a73e8; }
+.finding-card-label-green  { color:#22c55e; }
+.finding-card-body { font-size:18px; color:#334155; line-height:1.7; flex:1; }
+.finding-steps { list-style:none; display:flex; flex-direction:column; gap:10px; flex:1; }
+.finding-step {
+  display:flex; gap:14px; align-items:flex-start;
+  background:#f8fafc; border-radius:8px; padding:12px 16px;
+  border-left:3px solid #1a73e8;
+}
+.finding-step-num {
+  width:28px; height:28px; border-radius:50%; flex-shrink:0;
+  background:#1a73e8; color:#fff; font-weight:700; font-size:14px;
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+.finding-step-text { font-size:16px; color:#334155; line-height:1.5; }
+.finding-step-code {
+  font-family:monospace; font-size:14px; background:#e2e8f0;
+  color:#0f1b2d; padding:1px 6px; border-radius:4px;
+}
+
+/* ══════════════════════════════════════════
+   SLIDE – MULTI-FINDING (3 issues per slide)
+══════════════════════════════════════════ */
+.multi-body { position:absolute; top:160px; left:0; right:0; bottom:0; padding:32px 80px; }
+.multi-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; height:100%; }
+.multi-card {
+  background:#fff; border-radius:14px; border:1px solid #e2e8f0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05); padding:28px; display:flex; flex-direction:column;
+}
+.multi-card-top {
+  display:flex; align-items:center; gap:12px; margin-bottom:16px;
+  padding-bottom:14px; border-bottom:2px solid #f1f5f9;
+}
+.multi-card-num {
+  width:40px; height:40px; border-radius:10px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:18px; color:#fff;
+}
+.multi-card-num-red    { background:#ef4444; }
+.multi-card-num-amber  { background:#f59e0b; }
+.multi-card-num-green  { background:#22c55e; }
+.multi-card-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:17px; color:#0f1b2d; line-height:1.2;
+}
+.multi-card-badge { margin-top:4px; }
+.multi-card-section {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:11px; color:#8ba3c0; letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:6px; margin-top:12px;
+}
+.multi-card-text { font-size:15px; color:#475569; line-height:1.5; }
+.multi-card-fix { font-size:14px; color:#334155; line-height:1.5; }
+.multi-card-fix-item {
+  display:flex; gap:8px; align-items:flex-start; margin-bottom:7px;
+}
+.multi-card-fix-dot {
+  width:6px; height:6px; border-radius:50%; background:#1a73e8;
+  margin-top:7px; flex-shrink:0;
+}
+
+/* ══════════════════════════════════════════
+   SLIDE – RECOMMENDED ACTIONS (closing)
+══════════════════════════════════════════ */
+.s-actions-bg { position:absolute; inset:0; background:#0f1b2d; }
+.s-actions-grid-bg {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(26,115,232,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,115,232,0.04) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+.s-actions-header {
+  position:absolute; top:0; left:0; right:0; height:160px;
+  background: linear-gradient(135deg,#162236,#1a73e8);
+  display:flex; align-items:center; padding:0 80px;
+}
+.s-actions-header-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:48px; color:#fff;
+}
+.s-actions-body { position:absolute; top:160px; left:0; right:0; bottom:0; padding:40px 80px; }
+.s-actions-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; }
+.action-card {
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px; padding:28px; display:flex; flex-direction:column; gap:14px;
+}
+.action-num {
+  width:44px; height:44px; border-radius:10px;
+  background:linear-gradient(135deg,#1a73e8,#38bdf8);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"montserrat",sans-serif; font-weight:700; font-size:20px; color:#fff;
+}
+.action-title {
+  font-family:"montserrat",sans-serif; font-weight:700;
+  font-size:19px; color:#f0f6ff; line-height:1.2;
+}
+.action-text { font-size:16px; color:#8ba3c0; line-height:1.5; flex:1; }
+.action-cmd {
+  font-family:monospace; font-size:14px; background:rgba(26,115,232,0.15);
+  color:#38bdf8; padding:8px 14px; border-radius:6px; border:1px solid rgba(56,189,248,0.2);
+}
+.s-actions-footer {
+  position:absolute; bottom:0; left:0; right:0; height:6px;
+  background:linear-gradient(90deg,#1a73e8,#38bdf8,#1a73e8);
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════ SLIDE 1 – TITLE ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="s1-bg"></div>
+  <div class="s1-grid"></div>
+  <div class="s1-accent"></div>
+  <div class="s1-circle"></div>
+  <div class="s1-circle2"></div>
+
+  <div class="s1-logo-row">
+    <div class="s1-logo-icon">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="3" y="3" width="10" height="10" rx="2" fill="#fff" opacity="0.9"/>
+        <rect x="15" y="3" width="10" height="10" rx="2" fill="#fff" opacity="0.55"/>
+        <rect x="3" y="15" width="10" height="10" rx="2" fill="#fff" opacity="0.55"/>
+        <rect x="15" y="15" width="10" height="10" rx="2" fill="#fff" opacity="0.25"/>
+      </svg>
+    </div>
+    <span class="s1-logo-text">DDC Skills · CAD Audit</span>
+  </div>
+
+  <div class="s1-tag">ISSUED 2026-06-25</div>
+
+  <div class="s1-content">
+    <div class="s1-eyebrow">Senior CAD Engineer Review</div>
+    <div class="s1-title">CAD Drawing<br><span>Audit Report</span></div>
+    <div class="s1-subtitle">P159SDMEPMACCRCKA023GF · HL Coordination Drawing<br>AutoCAD 2023 · DWG AC1032 · ISO A0</div>
+    <div class="s1-meta">
+      <div class="s1-meta-item">
+        <div class="s1-meta-label">Project</div>
+        <div class="s1-meta-value">P159 MEP Coordination</div>
+      </div>
+      <div class="s1-meta-item">
+        <div class="s1-meta-label">Findings</div>
+        <div class="s1-meta-value">10 Total (2 Critical)</div>
+      </div>
+      <div class="s1-meta-item">
+        <div class="s1-meta-label">File Size</div>
+        <div class="s1-meta-value">18.6 MB</div>
+      </div>
+      <div class="s1-meta-item">
+        <div class="s1-meta-label">Audit Date</div>
+        <div class="s1-meta-value">2026-06-25</div>
+      </div>
+    </div>
+  </div>
+  <div class="s1-bottom"></div>
+</div>
+
+<!-- ════════════════════════ SLIDE 2 – DOCUMENT OVERVIEW ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="s2-bg"></div>
+  <div class="dark-header">
+    <span class="accent-bar"></span>
+    <span class="dark-header-title">Document Overview</span>
+    <span class="dark-header-num">02</span>
+  </div>
+  <div class="s2-body">
+    <div class="s2-grid">
+      <!-- Card 1: File Details -->
+      <div class="s2-card">
+        <div class="s2-card-label">File Information</div>
+        <div class="s2-row">
+          <div class="s2-row-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="#1a73e8"><path d="M13 2H6a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V9l-5-7z"/><polyline points="13 2 13 9 20 9" fill="none" stroke="#1a73e8" stroke-width="1.5"/></svg>
+          </div>
+          <div class="s2-row-text">
+            <div class="s2-row-key">Format</div>
+            <div class="s2-row-val">AutoCAD DWG · AC1032 (2018–2020)<br><span style="color:#1a73e8;font-weight:600">Saved by AutoCAD 2023 T.53.0.0 x64</span></div>
+          </div>
+        </div>
+        <div class="s2-row">
+          <div class="s2-row-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#1a73e8" stroke-width="2"><rect x="3" y="4" width="16" height="16" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="19" y2="10"/></svg>
+          </div>
+          <div class="s2-row-text">
+            <div class="s2-row-key">Dates</div>
+            <div class="s2-row-val">Created: 2025-10-06 &nbsp;·&nbsp; Last Modified: 2026-06-16</div>
+          </div>
+        </div>
+        <div class="s2-row">
+          <div class="s2-row-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#1a73e8" stroke-width="2"><rect x="2" y="3" width="18" height="16" rx="2"/><polyline points="2 9 22 9"/></svg>
+          </div>
+          <div class="s2-row-text">
+            <div class="s2-row-key">Paper Size &amp; Scale</div>
+            <div class="s2-row-val">ISO A0 (841 × 1189 mm) · Primary Scale <strong>1:50 Metric</strong></div>
+          </div>
+        </div>
+        <div class="s2-row">
+          <div class="s2-row-icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#1a73e8" stroke-width="2"><circle cx="11" cy="11" r="9"/><polyline points="11 6 11 11 15 13"/></svg>
+          </div>
+          <div class="s2-row-text">
+            <div class="s2-row-key">File Size</div>
+            <div class="s2-row-val"><strong>18.6 MB</strong> — 3–4× expected (embedded raster images)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Drawing Type -->
+      <div class="s2-card">
+        <div class="s2-card-label">Drawing Type &amp; Purpose</div>
+        <div class="s2-card-title">MEP &amp; Building Services<br>Coordination Drawing</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0">
+          <span class="s2-badge">Mechanical</span>
+          <span class="s2-badge">Electrical</span>
+          <span class="s2-badge">Plumbing</span>
+          <span class="s2-badge">Fire Protection</span>
+          <span class="s2-badge">Structural</span>
+        </div>
+        <div class="s2-row">
+          <div class="s2-row-text">
+            <div class="s2-row-key">Floor Levels Covered</div>
+            <div class="s2-row-val">Basement 01 &amp; 02 · Ground Floor · First Floor · Mezzanine Level</div>
+          </div>
+        </div>
+        <div class="s2-row">
+          <div class="s2-row-text">
+            <div class="s2-row-key">BIM Reference</div>
+            <div class="s2-row-val" style="font-family:monospace;font-size:15px;color:#0f1b2d;background:#f1f5f9;padding:6px 10px;border-radius:6px;">22_517-YMA-SD-XX-M3-0-00.rvt</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom wide card: description -->
+      <div class="s2-desc-card" style="grid-column:1/-1;">
+        <div class="s2-card-label" style="color:#38bdf8;">Drawing Purpose</div>
+        <div class="s2-desc-text">
+          A <strong style="color:#fff">Highlighted Coordination overlay</strong> — all building services disciplines superimposed on a single A0 sheet to identify and resolve spatial clashes before installation. The suffix <strong style="color:#38bdf8">HL_Coordination</strong> denotes live coordination clash markup. Project code <strong style="color:#fff">P159SDMEP</strong> = Structural, Drainage, Mechanical, Electrical &amp; Plumbing on Project 159.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 3 – COMPONENT KEY (Floors & Fire) ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="s3-bg"></div>
+  <div class="dark-header">
+    <span class="accent-bar"></span>
+    <span class="dark-header-title">Component Key</span>
+    <span class="dark-header-sub" style="color:#38bdf8;font-family:'montserrat',sans-serif;font-weight:700;font-size:22px;margin-left:20px;">Floor Levels &amp; Fire Protection Systems</span>
+    <span class="dark-header-num">03</span>
+  </div>
+  <div class="s3-body">
+    <div class="s3-cols">
+      <!-- Floor Levels -->
+      <div class="comp-block">
+        <div class="comp-block-header">
+          <div class="comp-block-icon" style="background:rgba(26,115,232,0.12);">🏢</div>
+          <div class="comp-block-title">Floor Levels &amp; Elevations</div>
+        </div>
+        <table class="comp-table">
+          <tr><td>GROUND FLOOR PLAN</td><td>Ground-level MEP services layout — primary coordination level</td></tr>
+          <tr><td>FIRST FLOOR PLAN</td><td>First floor building services plan</td></tr>
+          <tr><td>BASEMENT 01 / 02</td><td>Below-grade mechanical plant and utility space plans</td></tr>
+          <tr><td>MEZZANINE LEVEL FRAMING</td><td>Intermediate structural level with framing layout (V17)</td></tr>
+          <tr><td>−0.468 FFL/SSL</td><td>Spot elevation: Finished Floor Level / Structural Slab Level at −468 mm below datum</td></tr>
+        </table>
+      </div>
+      <!-- Fire Protection -->
+      <div class="comp-block">
+        <div class="comp-block-header">
+          <div class="comp-block-icon" style="background:rgba(239,68,68,0.1);">🔥</div>
+          <div class="comp-block-title">Fire Protection &amp; Detection</div>
+        </div>
+        <table class="comp-table">
+          <tr><td>BH-SAD225</td><td>Addressable ceiling-mounted smoke detector, model SAD225</td></tr>
+          <tr><td>HEAT DETECTOR</td><td>Thermal detector triggered by temperature rise</td></tr>
+          <tr><td>MULTI DETECTOR</td><td>Combined smoke + heat sensor in one ceiling unit</td></tr>
+          <tr><td>DUCT SPRINKLER</td><td>Sprinkler head installed inside HVAC ductwork</td></tr>
+          <tr><td>CO2 5KG / 2.5KG DCP</td><td>CO₂ and Dry Chemical Powder portable extinguishers</td></tr>
+          <tr><td>FHRC S TYPE</td><td>Fire Hose Reel Cabinet — surface-mounted type</td></tr>
+          <tr><td>ZCV / AZCV</td><td>Zone Control Valve / Automatic Zone Control Valve for sprinkler zones</td></tr>
+          <tr><td>BOP 3100/3050/2735</td><td>Branch-Off Points at specified pipe centreline elevations (mm above datum)</td></tr>
+          <tr><td>WRP T/A · GCRP T/A</td><td>Wet Riser Pipe / Gaseous Clean-agent Riser Pipe — Top/Access connection point</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 4 – COMPONENT KEY (MEP Systems) ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="s3-bg"></div>
+  <div class="dark-header">
+    <span class="accent-bar"></span>
+    <span class="dark-header-title">Component Key</span>
+    <span class="dark-header-sub" style="color:#38bdf8;font-family:'montserrat',sans-serif;font-weight:700;font-size:22px;margin-left:20px;">HVAC · Plumbing · Electrical · Structural</span>
+    <span class="dark-header-num">04</span>
+  </div>
+  <div class="s3-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;height:100%;">
+      <!-- HVAC -->
+      <div class="comp-block">
+        <div class="comp-block-header">
+          <div class="comp-block-icon" style="background:rgba(56,189,248,0.12);">❄️</div>
+          <div class="comp-block-title">HVAC &amp; Air Distribution</div>
+        </div>
+        <table class="comp-table">
+          <tr><td>GCE-AT-Slot Diffuser Supply</td><td>Linear slot ceiling diffuser — supply air (1 or 2 slots, 16–20 mm openings)</td></tr>
+          <tr><td>GCE-AT-Slot Diffuser Return</td><td>Linear slot diffuser for return air collection</td></tr>
+          <tr><td>GCE-AT-RLBG Side Return Grille</td><td>Sidewall/low-profile return air grille, standard neck connection</td></tr>
+          <tr><td>BOP 3100/3050/2735</td><td>Duct branch-off points at specified elevations</td></tr>
+        </table>
+      </div>
+      <!-- Plumbing -->
+      <div class="comp-block">
+        <div class="comp-block-header">
+          <div class="comp-block-icon" style="background:rgba(34,197,94,0.12);">🔧</div>
+          <div class="comp-block-title">Plumbing &amp; Drainage</div>
+        </div>
+        <table class="comp-table">
+          <tr><td>GCE-PX-Valve Chamber</td><td>Prefabricated underground valve access pit for pipe networks</td></tr>
+          <tr><td>ISOLATION VALVE</td><td>Section shut-off valve for maintenance isolation</td></tr>
+          <tr><td>BIB TRAP</td><td>Siphon trap at floor drain or sanitary connection</td></tr>
+          <tr><td>D-Riser</td><td>Vertical drainage riser pipe running between floors</td></tr>
+          <tr><td>13A SS IP65</td><td>13-amp stainless-steel weatherproof switched socket (IP65 rated)</td></tr>
+        </table>
+      </div>
+      <!-- Electrical & Structural -->
+      <div style="display:flex;flex-direction:column;gap:20px;height:100%;">
+        <div class="comp-block" style="flex:1;">
+          <div class="comp-block-header">
+            <div class="comp-block-icon" style="background:rgba(245,158,11,0.12);">⚡</div>
+            <div class="comp-block-title">Electrical</div>
+          </div>
+          <table class="comp-table">
+            <tr><td>CABLE TRAY 150MM WITH COVER</td><td>150 mm wide covered cable tray for protected wiring</td></tr>
+            <tr><td>ASL-CB-TYPE1 / TYPE4</td><td>Cable bracket support types 1 &amp; 4 (ASL manufacturer)</td></tr>
+            <tr><td>EARTHING SCHEMATIC</td><td>Earthing layout diagram embedded in modelspace</td></tr>
+          </table>
+        </div>
+        <div class="comp-block" style="flex:1;">
+          <div class="comp-block-header">
+            <div class="comp-block-icon" style="background:rgba(107,114,128,0.12);">🏗️</div>
+            <div class="comp-block-title">Structural</div>
+          </div>
+          <table class="comp-table">
+            <tr><td>Column 350×800</td><td>Revit-family concrete column, 350 mm × 800 mm cross-section</td></tr>
+            <tr><td>Spot Elevation</td><td>Survey point showing finished floor or structural slab level</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 5 – FINDINGS SUMMARY ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="s5-bg"></div>
+  <div class="s5-grid-bg"></div>
+  <div class="s5-header">
+    <span style="display:inline-block;width:6px;height:44px;background:#1a73e8;border-radius:3px;margin-right:20px;"></span>
+    <span class="s5-header-title">All Findings – Summary</span>
+    <div class="s5-counters">
+      <div class="s5-counter">
+        <div class="s5-counter-num" style="color:#ef4444;">2</div>
+        <div class="s5-counter-label">Critical</div>
+      </div>
+      <div class="s5-counter">
+        <div class="s5-counter-num" style="color:#f59e0b;">7</div>
+        <div class="s5-counter-label">Flagged</div>
+      </div>
+      <div class="s5-counter">
+        <div class="s5-counter-num" style="color:#22c55e;">1</div>
+        <div class="s5-counter-label">Pass</div>
+      </div>
+      <div class="s5-counter" style="background:rgba(26,115,232,0.1);border-color:rgba(26,115,232,0.2);">
+        <div class="s5-counter-num" style="color:#1a73e8;">10</div>
+        <div class="s5-counter-label">Total</div>
+      </div>
+    </div>
+  </div>
+  <div class="s5-body">
+    <table class="s5-table">
+      <thead><tr>
+        <th>#</th>
+        <th>Issue</th>
+        <th>Status</th>
+        <th>Location</th>
+        <th>Priority</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Broken / absolute XREF paths — files will not load on other machines</td>
+          <td><span class="badge-critical">🔴 Critical</span></td>
+          <td>All Levels — XREF Manager</td>
+          <td><span class="priority-high">Fix Immediately</span></td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Legacy AEC proxy objects display as blank shapes in standard AutoCAD</td>
+          <td><span class="badge-critical">🔴 Critical</span></td>
+          <td>Architectural Background — Modelspace</td>
+          <td><span class="priority-high">Fix Before Issue</span></td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Mixed 2D/3D geometry — clash detection is unreliable</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>Modelspace — All Levels</td>
+          <td><span class="priority-medium">Before Coordination Review</span></td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Commercial font Swis721 Cn BT missing — annotation will corrupt on other machines</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>All Text &amp; Annotation</td>
+          <td><span class="priority-medium">Fix Before Distribution</span></td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>ANSI (US) hatch patterns used on ISO metric project — non-compliant</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>Material Hatching — Throughout</td>
+          <td><span class="priority-medium">Correct in Next Revision</span></td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>FFL and SSL conflated in spot elevation — MEP set-out ambiguity</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>Spot Elevation: −0.468 FFL/SSL</td>
+          <td><span class="priority-medium">Clarify Before Installation</span></td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Architectural title block on MEP document — incomplete required fields</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>Drawing Border / Title Block</td>
+          <td><span class="priority-medium">Update in Next Revision</span></td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Embedded raster images — 18.6 MB file, performance &amp; transmittal risk</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>Whole File</td>
+          <td><span class="priority-medium">Fix Before Next Issue</span></td>
+        </tr>
+        <tr>
+          <td>09</td>
+          <td>Orphaned dynamic block history records — database bloat, possible corruption</td>
+          <td><span class="badge-flagged">🟡 Flagged</span></td>
+          <td>Block Database — Whole File</td>
+          <td><span class="priority-medium">Fix via WBLOCK / PURGE</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>GCE-* block naming is consistent and well structured</td>
+          <td><span class="badge-pass">🟢 Pass</span></td>
+          <td>MEP Block Definitions</td>
+          <td><span class="priority-low">No Action Required</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 6 – FINDING 1 (Critical) ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="finding-slide-bg"></div>
+  <div class="finding-header finding-header-critical">
+    <span class="finding-tag finding-tag-critical">🔴 CRITICAL ERROR</span>
+    <div class="finding-header-content">
+      <div class="finding-header-label">Finding 01 · External References</div>
+      <div class="finding-header-title">Broken XREF Paths — All Floor Levels</div>
+    </div>
+    <div class="finding-num">01</div>
+  </div>
+  <div class="finding-body">
+    <div class="finding-cols">
+      <div class="finding-card">
+        <div class="finding-card-label finding-card-label-red">Mistake Identified</div>
+        <div class="finding-card-body">
+          XREFs link to a hard-coded UNC network path:<br>
+          <span style="font-family:monospace;font-size:15px;background:#fee2e2;color:#991b1b;padding:6px 12px;border-radius:6px;display:inline-block;margin:12px 0;">\\server\...\MEP ENGINEERING 15.04.13\XREF\</span><br><br>
+          Two critical problems:<br><br>
+          <strong>(a)</strong> The path timestamp <strong style="color:#ef4444;">15.04.13</strong> indicates these XREFs were last confirmed in April 2013 — <strong>over 10 years old</strong>. Linked files may be superseded revisions.<br><br>
+          <strong>(b)</strong> Absolute drive-letter paths (<code style="background:#fee2e2;color:#991b1b;padding:2px 6px;border-radius:4px;">K:\</code>, <code style="background:#fee2e2;color:#991b1b;padding:2px 6px;border-radius:4px;">d:\D1</code>) break on any machine other than the original workstation.
+        </div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-card-label finding-card-label-blue">How to Fix in AutoCAD</div>
+        <ol class="finding-steps">
+          <li class="finding-step">
+            <div class="finding-step-num">1</div>
+            <div class="finding-step-text">Open the External References palette: type <span class="finding-step-code">XREF</span> or press <span class="finding-step-code">Ctrl+7</span></div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">2</div>
+            <div class="finding-step-text">Right-click each XREF → <strong>Change Path</strong> → select <strong>Relative Path</strong> (project-root-relative)</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">3</div>
+            <div class="finding-step-text">Use <span class="finding-step-code">ETRANSMIT</span> to bundle the host file + all XREFs into a self-contained transmittal package — auto-corrects all paths</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">4</div>
+            <div class="finding-step-text">Cross-check each XREF against the current project document register to confirm correct issued revision</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">5</div>
+            <div class="finding-step-text">Unload / detach all XREF entries that reference pre-2020 folder paths</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 7 – FINDING 2 (Critical) ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="finding-slide-bg"></div>
+  <div class="finding-header finding-header-critical">
+    <span class="finding-tag finding-tag-critical">🔴 CRITICAL ERROR</span>
+    <div class="finding-header-content">
+      <div class="finding-header-label">Finding 02 · Legacy Object Classes</div>
+      <div class="finding-header-title">AEC Proxy Objects — Invisible in Standard AutoCAD</div>
+    </div>
+    <div class="finding-num">02</div>
+  </div>
+  <div class="finding-body">
+    <div class="finding-cols">
+      <div class="finding-card">
+        <div class="finding-card-label finding-card-label-red">Mistake Identified</div>
+        <div class="finding-card-body">
+          The file contains <strong>AecArchBase80</strong> objects — AutoCAD Architecture 2007 proxy entities. These represent architectural elements: walls, slabs, doors, windows, stairs.<br><br>
+          On <strong>standard AutoCAD 2023</strong> (without the Architecture extension), these display as <strong style="color:#ef4444;">empty bounding-box placeholders</strong>. Users see a "proxy object" warning on opening, and all architecture background geometry disappears.<br><br>
+          This makes the coordination background <strong>completely unusable for clash detection</strong> — MEP services have no reference geometry to check against.
+          <br><br>
+          <div style="background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:14px 18px;font-size:16px;color:#991b1b;">
+            ⚠️ This affects all floor plan levels where an architectural XREF or background layer exists.
+          </div>
+        </div>
+      </div>
+      <div class="finding-card">
+        <div class="finding-card-label finding-card-label-blue">How to Fix in AutoCAD</div>
+        <ol class="finding-steps">
+          <li class="finding-step">
+            <div class="finding-step-num">1</div>
+            <div class="finding-step-text">Open the drawing in <strong>AutoCAD Architecture</strong> (any version ≥ 2007) — not standard AutoCAD</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">2</div>
+            <div class="finding-step-text">Select all AEC objects → run <span class="finding-step-code">AECEXPLODETOSOLID</span> or <span class="finding-step-code">EXPLODE</span> to convert to standard polylines, lines, and hatches</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">3</div>
+            <div class="finding-step-text">File → Export → AutoCAD DWG with <strong>"Explode AEC Objects"</strong> option checked — re-save as a plain DWG</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">4</div>
+            <div class="finding-step-text"><em>Interim fix:</em> type <span class="finding-step-code">PROXYGRAPHICS</span> → set to <strong>1</strong> to store visual proxies (shapes display but remain non-editable)</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 8 – FINDINGS 3, 4, 5 ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="finding-slide-bg"></div>
+  <div class="finding-header finding-header-flagged">
+    <span class="finding-tag finding-tag-flagged">🟡 Flagged</span>
+    <div class="finding-header-content">
+      <div class="finding-header-label">Findings 03, 04 &amp; 05</div>
+      <div class="finding-header-title">Geometry · Fonts · Hatch Standards</div>
+    </div>
+    <div class="finding-num">03–05</div>
+  </div>
+  <div class="multi-body">
+    <div class="multi-grid">
+      <!-- F3 -->
+      <div class="multi-card">
+        <div class="multi-card-top">
+          <div class="multi-card-num multi-card-num-amber">03</div>
+          <div>
+            <div class="multi-card-title">Mixed 2D/3D Geometry</div>
+            <div class="multi-card-badge"><span class="badge-flagged" style="font-size:12px;padding:3px 10px;">Flagged</span></div>
+          </div>
+        </div>
+        <div class="multi-card-section">Mistake</div>
+        <div class="multi-card-text">Modelspace contains <strong>3D elements</strong> (MemberElevationDesign, AecSpaceTriangleD, Spot Elevations) mixed with 2D plan geometry. This makes clash detection unreliable — 3D elements at inconsistent Z-heights create false clearances or missed clashes.</div>
+        <div class="multi-card-section">Fix</div>
+        <div class="multi-card-fix">
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Record all elevation values in TEXT/MTEXT annotation first</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Run <strong>FLATTEN</strong> command to reduce all geometry to Z=0</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Move 3D elements to a dedicated <strong>3D-COORD</strong> layer, frozen in 2D viewports</div></div>
+        </div>
+      </div>
+      <!-- F4 -->
+      <div class="multi-card">
+        <div class="multi-card-top">
+          <div class="multi-card-num multi-card-num-amber">04</div>
+          <div>
+            <div class="multi-card-title">Missing Commercial Font</div>
+            <div class="multi-card-badge"><span class="badge-flagged" style="font-size:12px;padding:3px 10px;">Flagged</span></div>
+          </div>
+        </div>
+        <div class="multi-card-section">Mistake</div>
+        <div class="multi-card-text">Drawing uses <strong>A_Swis721 Cn BT</strong> (Bitstream Swiss 721 Condensed — a paid commercial font). On machines without it, AutoCAD substitutes a default font, causing text overflow into dimension strings and unreadable annotation notes.</div>
+        <div class="multi-card-section">Fix</div>
+        <div class="multi-card-fix">
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div><strong>Format → Text Style</strong> → replace Swis721 with <strong>Arial Narrow</strong> or <strong>ROMANS.shx</strong></div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Run <strong>REGEN / REGENALL</strong> to rebuild display</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Include font in ETRANSMIT packages for all recipients</div></div>
+        </div>
+      </div>
+      <!-- F5 -->
+      <div class="multi-card">
+        <div class="multi-card-top">
+          <div class="multi-card-num multi-card-num-amber">05</div>
+          <div>
+            <div class="multi-card-title">ANSI Hatches on ISO Project</div>
+            <div class="multi-card-badge"><span class="badge-flagged" style="font-size:12px;padding:3px 10px;">Flagged</span></div>
+          </div>
+        </div>
+        <div class="multi-card-section">Mistake</div>
+        <div class="multi-card-text"><strong>ANSI31</strong> (US steel hatch) and <strong>ANSI37</strong> (US brass hatch) used on an ISO metric project. Non-compliant with BS/ISO drawing standards. ANSI37 (brass) may also be applied to wrong materials — likely masonry or insulation.</div>
+        <div class="multi-card-section">Fix</div>
+        <div class="multi-card-fix">
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div><strong>QSELECT</strong> → Hatch → Pattern Name = ANSI31 → replace with <strong>LINE</strong> (ISO general section)</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Investigate ANSI37 intent: replace with <strong>INSUL / AR-CONC / STEEL</strong> as appropriate</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Add hatch legend to the drawing title sheet</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 9 – FINDINGS 6, 7, 8 ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="finding-slide-bg"></div>
+  <div class="finding-header finding-header-flagged">
+    <span class="finding-tag finding-tag-flagged">🟡 Flagged</span>
+    <div class="finding-header-content">
+      <div class="finding-header-label">Findings 06, 07 &amp; 08</div>
+      <div class="finding-header-title">Elevation Ambiguity · Title Block · File Size</div>
+    </div>
+    <div class="finding-num">06–08</div>
+  </div>
+  <div class="multi-body">
+    <div class="multi-grid">
+      <!-- F6 -->
+      <div class="multi-card">
+        <div class="multi-card-top">
+          <div class="multi-card-num multi-card-num-amber">06</div>
+          <div>
+            <div class="multi-card-title">FFL/SSL Conflated in Spot Elevation</div>
+            <div class="multi-card-badge"><span class="badge-flagged" style="font-size:12px;padding:3px 10px;">Flagged</span></div>
+          </div>
+        </div>
+        <div class="multi-card-section">Mistake</div>
+        <div class="multi-card-text">Annotation <strong>−0.468 FFL/SSL</strong> combines Finished Floor Level and Structural Slab Level in one value. These are typically separated by 75–150 mm of screed and finishes. MEP services coordinated to "FFL" vs "SSL" will be set out at the wrong height, causing penetration and clash errors.</div>
+        <div class="multi-card-section">Fix</div>
+        <div class="multi-card-fix">
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Confirm SSL from structural drawings / Revit model</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Confirm FFL from architectural finishes schedule</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Replace with two separate labels: <strong>SSL = −0.xxx</strong> and <strong>FFL = −0.xxx</strong></div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Update all BOP and drainage invert levels to explicitly reference SSL or FFL</div></div>
+        </div>
+      </div>
+      <!-- F7 -->
+      <div class="multi-card">
+        <div class="multi-card-top">
+          <div class="multi-card-num multi-card-num-amber">07</div>
+          <div>
+            <div class="multi-card-title">Architectural Title Block on MEP Document</div>
+            <div class="multi-card-badge"><span class="badge-flagged" style="font-size:12px;padding:3px 10px;">Flagged</span></div>
+          </div>
+        </div>
+        <div class="multi-card-section">Mistake</div>
+        <div class="multi-card-text">Title block is <strong>A1-New Title Sheet</strong> from the <strong>ARCHCORP-AR</strong> (architectural) library. An MEP coordination document requires MEP-specific fields: responsible MEP engineer, discipline code, coordination status stamp, and revision cloud tracking.</div>
+        <div class="multi-card-section">Fix</div>
+        <div class="multi-card-fix">
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Open block editor (<strong>BEDIT</strong>) → swap for MEP consultant's approved title block</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Fill: Project No. (P159), Discipline (MEP/Building Services), Status ("ISSUED FOR COORDINATION")</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Add <strong>REVCLOUD</strong> with delta markers at each coordination clash location</div></div>
+        </div>
+      </div>
+      <!-- F8 -->
+      <div class="multi-card">
+        <div class="multi-card-top">
+          <div class="multi-card-num multi-card-num-amber">08</div>
+          <div>
+            <div class="multi-card-title">Oversized File / Embedded Raster Images</div>
+            <div class="multi-card-badge"><span class="badge-flagged" style="font-size:12px;padding:3px 10px;">Flagged</span></div>
+          </div>
+        </div>
+        <div class="multi-card-section">Mistake</div>
+        <div class="multi-card-text">At <strong>18.6 MB</strong>, the file is 3–4× the expected size for a 2D A0 coordination drawing. Binary analysis confirms embedded PNG raster images. These cause slow viewport regeneration, crashes on workstations with &lt;8 GB RAM, and bloat transmittal packages.</div>
+        <div class="multi-card-section">Fix</div>
+        <div class="multi-card-fix">
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div><strong>IMAGE</strong> command → locate rasters → Detach; re-attach as external references</div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Run <strong>PURGE (All)</strong> then <strong>AUDIT (Fix = Y)</strong></div></div>
+          <div class="multi-card-fix-item"><div class="multi-card-fix-dot"></div><div>Target file size &lt; 5 MB for a 2D A0 coordination sheet</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 10 – FINDINGS 9 & 10 ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="finding-slide-bg"></div>
+  <div class="dark-header">
+    <span class="accent-bar"></span>
+    <span class="dark-header-title">Findings 09 &amp; 10</span>
+    <span style="font-family:'source-sans-3',sans-serif;font-size:20px;color:#8ba3c0;margin-left:24px;">Block Database · Block Naming</span>
+    <span class="dark-header-num">09–10</span>
+  </div>
+  <div class="finding-body" style="top:160px;">
+    <div class="finding-cols">
+      <!-- F9 -->
+      <div class="finding-card">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div class="multi-card-num multi-card-num-amber" style="width:48px;height:48px;font-size:20px;border-radius:12px;">09</div>
+          <div>
+            <span class="badge-flagged">🟡 Flagged</span>
+            <div style="font-family:'montserrat',sans-serif;font-weight:700;font-size:22px;color:#0f1b2d;margin-top:6px;">Orphaned Dynamic Block History</div>
+          </div>
+        </div>
+        <div class="finding-card-label finding-card-label-amber">Mistake Identified</div>
+        <div class="finding-card-body" style="margin-bottom:20px;">
+          The file contains <strong>ACAD_ENHANCEDBLOCKHISTORY</strong> and <strong>AcDbDynamicBlockRoundTripPurgePreventer</strong> records — ghost-history entries created when dynamic blocks are round-tripped between AutoCAD and Revit exports.<br><br>
+          These <strong>resist standard PURGE</strong> and inflate the file database. In rare cases they trigger corruption warnings on open.
+        </div>
+        <div class="finding-card-label finding-card-label-blue">How to Fix</div>
+        <ol class="finding-steps">
+          <li class="finding-step">
+            <div class="finding-step-num">1</div>
+            <div class="finding-step-text">Run <span class="finding-step-code">PURGE</span> with "Purge Nested Items" enabled — repeat 3–4 times</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">2</div>
+            <div class="finding-step-text">If records persist: <span class="finding-step-code">WBLOCK → *</span> (entire drawing to new file) — strips all orphaned database entries</div>
+          </li>
+          <li class="finding-step">
+            <div class="finding-step-num">3</div>
+            <div class="finding-step-text">Run <span class="finding-step-code">AUDIT</span> on the new file → Y to fix all reported errors</div>
+          </li>
+        </ol>
+      </div>
+      <!-- F10 -->
+      <div class="finding-card" style="border:2px solid rgba(34,197,94,0.3);background:linear-gradient(160deg,#fff,#f0fdf4);">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div class="multi-card-num multi-card-num-green" style="width:48px;height:48px;font-size:20px;border-radius:12px;">10</div>
+          <div>
+            <span class="badge-pass">🟢 Pass</span>
+            <div style="font-family:'montserrat',sans-serif;font-weight:700;font-size:22px;color:#0f1b2d;margin-top:6px;">GCE-* Block Naming Convention</div>
+          </div>
+        </div>
+        <div class="finding-card-label finding-card-label-green">Observation</div>
+        <div class="finding-card-body">
+          The <strong>GCE-</strong> prefixed block library follows a structured, consistent naming convention using discipline prefix codes:<br><br>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;">
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;">
+              <div style="font-size:13px;color:#16a34a;font-weight:700;letter-spacing:1px;">GCE-AT-</div>
+              <div style="font-size:15px;color:#334155;">Air Terminal (diffusers, grilles)</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;">
+              <div style="font-size:13px;color:#16a34a;font-weight:700;letter-spacing:1px;">GCE-PX-</div>
+              <div style="font-size:15px;color:#334155;">Plumbing Fixture</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;">
+              <div style="font-size:13px;color:#16a34a;font-weight:700;letter-spacing:1px;">GCE-DT-</div>
+              <div style="font-size:15px;color:#334155;">Drawing Tool (break lines, symbols)</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;">
+              <div style="font-size:13px;color:#16a34a;font-weight:700;letter-spacing:1px;">GCE-FA-</div>
+              <div style="font-size:15px;color:#334155;">Fire Alarm (detectors, sounders)</div>
+            </div>
+          </div>
+          Aligns with <strong>BS8541-1</strong> Library Object Standards for construction BIM.<br><br>
+          <strong>Recommendation:</strong> Verify each block's <span style="font-family:monospace;background:#f1f5f9;padding:2px 6px;border-radius:4px;">ATTDEF</span> attribute data is populated for downstream equipment schedule extraction and O&amp;M manuals.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════ SLIDE 11 – RECOMMENDED ACTIONS ════════════════════════ -->
+<div class="slide" data-canvas-width="1920" data-canvas-height="1080">
+  <div class="s-actions-bg"></div>
+  <div class="s-actions-grid-bg"></div>
+  <div class="s-actions-header">
+    <span style="display:inline-block;width:6px;height:52px;background:#fff;border-radius:3px;margin-right:24px;opacity:0.5;"></span>
+    <span class="s-actions-header-title">Recommended Actions · Priority Order</span>
+    <div style="margin-left:auto;font-family:'source-sans-3',sans-serif;font-size:18px;color:rgba(255,255,255,0.6);">Fix immediately → before issue → before distribution</div>
+  </div>
+  <div class="s-actions-body">
+    <div class="s-actions-grid">
+      <div class="action-card" style="border-color:rgba(239,68,68,0.3);">
+        <div class="action-num" style="background:linear-gradient(135deg,#ef4444,#b91c1c);">1</div>
+        <div class="action-title">Clean the File Database</div>
+        <div class="action-text">Strip AEC proxies, block history records, and embedded images from the DWG to create a clean working copy.</div>
+        <div class="action-cmd">AUDIT → PURGE (All) → WBLOCK *</div>
+      </div>
+      <div class="action-card" style="border-color:rgba(239,68,68,0.3);">
+        <div class="action-num" style="background:linear-gradient(135deg,#ef4444,#b91c1c);">2</div>
+        <div class="action-title">Resolve All XREFs</div>
+        <div class="action-text">Use ETRANSMIT to create a self-contained package with relative paths. Confirm every XREF is on the current project revision.</div>
+        <div class="action-cmd">ETRANSMIT → Relative Paths</div>
+      </div>
+      <div class="action-card" style="border-color:rgba(239,68,68,0.3);">
+        <div class="action-num" style="background:linear-gradient(135deg,#ef4444,#b91c1c);">3</div>
+        <div class="action-title">Convert AEC Objects</div>
+        <div class="action-text">Open in AutoCAD Architecture → explode all AEC proxy objects to standard AutoCAD geometry before re-issuing.</div>
+        <div class="action-cmd">AECEXPLODETOSOLID → Export DWG</div>
+      </div>
+      <div class="action-card" style="border-color:rgba(245,158,11,0.3);">
+        <div class="action-num" style="background:linear-gradient(135deg,#f59e0b,#d97706);">4</div>
+        <div class="action-title">Fix Font References</div>
+        <div class="action-text">Replace A_Swis721 Cn BT with Arial Narrow or ROMANS.shx across all text styles to prevent annotation corruption on recipient machines.</div>
+        <div class="action-cmd">Format → Text Style → Replace Font</div>
+      </div>
+      <div class="action-card" style="border-color:rgba(245,158,11,0.3);">
+        <div class="action-num" style="background:linear-gradient(135deg,#f59e0b,#d97706);">5</div>
+        <div class="action-title">Clarify Spot Elevation</div>
+        <div class="action-text">Separate −0.468 FFL/SSL into two distinct values sourced from structural and architectural drawings. Update all BOP and drainage invert annotations.</div>
+        <div class="action-cmd">Edit TEXT → Split into SSL + FFL</div>
+      </div>
+      <div class="action-card" style="border-color:rgba(245,158,11,0.3);">
+        <div class="action-num" style="background:linear-gradient(135deg,#f59e0b,#d97706);">6</div>
+        <div class="action-title">Re-issue with MEP Title Block</div>
+        <div class="action-text">Replace the architectural title block with the MEP consultant's approved template. Add "ISSUED FOR COORDINATION" status stamp and revision cloud markups for all flagged clashes.</div>
+        <div class="action-cmd">BEDIT → Swap Title Block → REVCLOUD</div>
+      </div>
+    </div>
+  </div>
+  <div class="s-actions-footer"></div>
+</div>
+
+<!-- ══ Navigation (outside slide roots — not exported) ══ -->
+<div id="nav" style="position:fixed;bottom:28px;right:28px;display:flex;gap:10px;z-index:999;">
+  <button onclick="scrollSlide(-1)" style="background:#1a73e8;border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.4);">‹</button>
+  <button onclick="scrollSlide(1)"  style="background:#1a73e8;border:none;color:#fff;width:48px;height:48px;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.4);">›</button>
+</div>
+<script>
+  let cur = 0;
+  const slides = document.querySelectorAll('.slide');
+  function scrollSlide(d) {
+    cur = Math.max(0, Math.min(slides.length - 1, cur + d));
+    slides[cur].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>
